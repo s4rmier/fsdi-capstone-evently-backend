@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
-from .models import Event, EventImage
-from .serializers import EventSerializer, EventImageSerializer
+from .models import Event, EventImage, EventRSVP
+from .serializers import EventSerializer, EventImageSerializer, EventRSVPSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -21,3 +21,8 @@ class EventImageViewSet(viewsets.ModelViewSet):
         images = EventImage.objects.filter(event_id=pk)
         serializer = EventImageSerializer(images, many=True, context={"request":request})
         return Response(serializer.data)
+    
+class EventRSVPViewSet(viewsets.ModelViewSet):
+    queryset = EventRSVP.objects.all()
+    serializer_class = EventRSVPSerializer
+    permission_classes = [permissions.AllowAny]
