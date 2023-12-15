@@ -16,7 +16,7 @@ class EventRSVP(models.Model):
     event = models.ForeignKey(Event, related_name="rsvps", on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     contact = models.CharField(max_length=100)
-    additional_guests = models.IntegerField(default=0)
+    guests = models.IntegerField(default=0)
 
     def __str__(self):
         return f"RSVP by {self.name} for {self.event.eventTitle}"

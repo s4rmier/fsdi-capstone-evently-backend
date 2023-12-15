@@ -14,4 +14,4 @@ class EventImageSerializer(serializers.ModelSerializer):
 class EventRSVPSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventRSVP
-        fields = ['event', 'name', 'contact', 'additional_guests']
+        fields = ['event', 'name', 'contact', 'guests']
