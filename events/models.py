@@ -10,18 +10,19 @@ class Event(models.Model):
 
     def __str__(self):
         return self.eventTitle
-    
 
-class EventRSVP(models.Model):
-    event = models.ForeignKey(Event, related_name="rsvps", on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    contact = models.CharField(max_length=100)
-    guests = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"RSVP by {self.name} for {self.event.eventTitle}"
 
 class EventImage(models.Model):
     event = models.ForeignKey(Event, related_name="images", on_delete=models.CASCADE)
     image = models.ImageField(upload_to="event_images/")
     imgtype = models.IntegerField(blank=True, null=True)
+
+
+class EventRSVP(models.Model):
+    event = models.ForeignKey(Event, related_name="rsvps", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    contact = models.CharField(max_length=100)
+    guests = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"RSVP by {self.name} for {self.event.eventTitle}"
