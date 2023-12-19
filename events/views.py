@@ -26,3 +26,9 @@ class EventRSVPViewSet(viewsets.ModelViewSet):
     queryset = EventRSVP.objects.all()
     serializer_class = EventRSVPSerializer
     permission_classes = [permissions.AllowAny]
+
+    @action(detail=True, methods=['get'], url_path="rsvp")
+    def get_event_rsvp(self, request, pk=None):
+        rsvp = EventRSVP.objects.filter(event_id=pk)
+        serializer = EventRSVPSerializer(rsvp, many=True, context={"request":request})
+        return Response(serializer.data)
